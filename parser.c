@@ -113,12 +113,19 @@ void parse_file ( char * filename,
     int step_3d = 20;
     int step = 100;
 
-    if (!strncmp(line, "push", strlen(line))) {
+    if (!*line);
+
+    else if (!strncmp(line, "push", strlen(line))) {
       push(csystems);
     }
 
     else if (!strncmp(line, "pop", strlen(line))) {
       pop(csystems);
+    }
+
+    else if (!strncmp(line, "print", strlen(line))) {
+      printf("%d\n", csystems->top);
+      print_stack(csystems);
     }
 
     else if ( strncmp(line, "box", strlen(line)) == 0 ) {
@@ -131,7 +138,7 @@ void parse_file ( char * filename,
       add_box(polygons, xvals[0], yvals[0], zvals[0],
         xvals[1], yvals[1], zvals[1]);
 
-      matrix_mult(polygons, peek(csystems));
+      matrix_mult(peek(csystems), polygons);
       draw_polygons(polygons, s, c);
       polygons->lastcol = 0;
     }//end of box
@@ -144,7 +151,7 @@ void parse_file ( char * filename,
        xvals, yvals, zvals, &r);
       add_sphere( polygons, xvals[0], yvals[0], zvals[0], r, step_3d);
 
-      matrix_mult(polygons, peek(csystems));
+      matrix_mult(peek(csystems), polygons);
       draw_polygons(polygons, s, c);
       polygons->lastcol = 0;
     }//end of sphere
@@ -157,7 +164,7 @@ void parse_file ( char * filename,
        xvals, yvals, zvals, &r, &r1);
       add_torus( polygons, xvals[0], yvals[0], zvals[0], r, r1, step_3d);
 
-      matrix_mult(polygons, peek(csystems));
+      matrix_mult(peek(csystems), polygons);
       draw_polygons(polygons, s, c);
       polygons->lastcol = 0;
     }//end of torus
@@ -170,7 +177,7 @@ void parse_file ( char * filename,
              xvals, yvals, zvals, &r);
       add_circle( edges, xvals[0], yvals[0], zvals[0], r, step);
 
-      matrix_mult(edges, peek(csystems));
+      matrix_mult(peek(csystems), edges);
       draw_lines(edges, s, c);
       edges->lastcol = 0;
     }//end of circle
@@ -198,7 +205,7 @@ void parse_file ( char * filename,
       add_curve( edges, xvals[0], yvals[0], xvals[1], yvals[1],
                  xvals[2], yvals[2], xvals[3], yvals[3], step, type);
 
-      matrix_mult(edges, peek(csystems));
+      matrix_mult(peek(csystems), edges);
       draw_lines(edges, s, c);
       edges->lastcol = 0;
     }//end of curve
@@ -215,7 +222,7 @@ void parse_file ( char * filename,
       add_edge(edges, xvals[0], yvals[0], zvals[0],
                xvals[1], yvals[1], zvals[1]);
 
-      matrix_mult(edges, peek(csystems));
+      matrix_mult(peek(csystems), edges);
       draw_lines(edges, s, c);
       edges->lastcol = 0;
     }//end line
