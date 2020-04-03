@@ -1,0 +1,64 @@
+push
+move
+250 125 0
+sphere
+0 0 0 100
+push
+move
+0 165 0
+sphere
+0 0 0 65
+push
+sphere
+0 0 65 10
+rotate
+x -25
+sphere
+0 0 65 10
+rotate
+x 50
+sphere
+0 0 65 10
+rotate
+y -15
+box
+65 10 10 100 10 10
+rotate
+y -150
+box
+65 10 10 100 10 10
+pop
+push
+move
+0 105 0
+sphere
+0 0 0 40
+push
+rotate
+x 15
+rotate
+z -15
+move
+0 30 0
+torus
+0 0 0 5 40
+move
+0 10 0
+torus
+0 0 0 5 40
+move
+0 10 0
+torus
+0 0 0 5 40
+pop
+push
+move
+-15 10 40
+sphere
+0 0 0 4
+move
+30 0 0
+sphere
+0 0 0 4
+save
+image.png
